@@ -19,6 +19,11 @@ repositories {
 }
 
 dependencies {
+	compile 'javax.validation:validation-api:2.0.1.Final'
+	compile 'org.hibernate.validator:hibernate-validator:6.0.8.Final'
+	compile 'javax.el:javax.el-api:3.0.0'
+	compile 'org.glassfish:javax.el:3.0.0'
+
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
