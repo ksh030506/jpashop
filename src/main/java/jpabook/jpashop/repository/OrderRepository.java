@@ -38,7 +38,7 @@ public class OrderRepository {
             } else {
                 jpql += " and";
             }
-            jpql += " o.status = :status";
+            jpql += " o.status = :orderStatus";
         }
 
         //회원 이름 검색
@@ -49,17 +49,17 @@ public class OrderRepository {
             } else {
                 jpql += " and";
             }
-            jpql += " m.name like :name";
+            jpql += " m.name like :memberName";
         }
 
         TypedQuery<Order> query = em.createQuery(jpql, Order.class)
                 .setMaxResults(1000);
 
         if(orderSearch.getOrderStatus() != null) {
-            query = query.setParameter("status", orderSearch.getOrderStatus());
+            query = query.setParameter("orderStatus", orderSearch.getOrderStatus());
         }
         if(orderSearch.getMemberName() != null) {
-            query = query.setParameter("name", orderSearch.getMemberName());
+            query = query.setParameter("memberName", orderSearch.getMemberName());
         }
 
         return query.getResultList();
@@ -80,13 +80,13 @@ public class OrderRepository {
 
         //주문 상태 검색
         if(orderSearch.getOrderStatus() != null) {
-            Predicate status = cb.equal(o.get("status"), orderSearch.getOrderStatus());
+            Predicate status = cb.equal(o.get("orderStatus"), orderSearch.getOrderStatus());
             criteria.add(status);
         }
         //회원 이름 검색
         if(StringUtils.hasText(orderSearch.getMemberName())) {
             Predicate name =
-                    cb.like(m.<String>get("name"), "%" + orderSearch.getMemberName() + "%");
+                    cb.like(m.<String>get("memberName"), "%" + orderSearch.getMemberName() + "%");
             criteria.add(name);
         }
 
